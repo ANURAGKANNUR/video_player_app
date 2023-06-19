@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440863871091",
+    "project_id": "video-player-6d353",
+    "storage_bucket": "video-player-6d353.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440863871091:android:6132ec121801cddde05a06",
+        "android_client_info": {
+          "package_name": "com.example.video_player"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440863871091-sm12782313ba8ki9grk59sfbqhq6s862.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHt-IpJQfUr688rXwn0yaMTIBZ3Cta4Qs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440863871091-sm12782313ba8ki9grk59sfbqhq6s862.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
