@@ -30,8 +30,15 @@ class StreamPage extends GetView<StreamController> {
               fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Chewie(
-        controller: controller.chewieController!,
+      body: WillPopScope(
+        onWillPop: () async {
+          controller.chewieController!.pause();
+          controller.chewieController!.dispose();
+          return true;
+        },
+        child: Chewie(
+          controller: controller.chewieController!,
+        ),
       ),
     );
   }
