@@ -6,10 +6,7 @@ class StreamController extends GetxController {
   var data = Get.arguments;
 
   final abc = "".obs;
- // VideoPlayerController? playerController;
   ChewieController? chewieController;
-
-
 
   @override
   void onInit() {
@@ -22,8 +19,4 @@ class StreamController extends GetxController {
         allowFullScreen: true,
         showControls: true);
   }
-
-
-
-
 }

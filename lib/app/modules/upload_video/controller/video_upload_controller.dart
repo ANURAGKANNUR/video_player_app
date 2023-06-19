@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoUploadController extends GetxController {
   PlatformFile? pickedFile = PlatformFile(name: '', size: 0).obs();
@@ -30,8 +28,6 @@ class VideoUploadController extends GetxController {
       String newFilePath =
           path.join(appFolderPath, path.basename(filePath.path));
       await filePath.copy(newFilePath);
-      final ref = FirebaseStorage.instance.ref().child(file);
-      ref.putFile(filePath);
       Get.back();
     } catch (e) {
       Get.snackbar("Unable to upload Video ", "",
@@ -39,7 +35,7 @@ class VideoUploadController extends GetxController {
           barBlur: 50,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM);
-          print(e);
+      print(e);
     }
   }
 
@@ -57,5 +53,4 @@ class VideoUploadController extends GetxController {
       return null;
     }
   }
-
 }

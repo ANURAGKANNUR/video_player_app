@@ -12,7 +12,11 @@ class SplashScreenPage extends GetView<SplashController> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset("assets/video.png",height: 200,width: 200,)
+        Image.asset(
+          "assets/video.png",
+          height: 200,
+          width: 200,
+        )
       ],
     );
   }
