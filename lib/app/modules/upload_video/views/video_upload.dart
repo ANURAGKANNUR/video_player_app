@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:video_app/app/modules/play_list/controller/play_list_controller.dart';
 import '../controller/video_upload_controller.dart';
 
 class VideoUpload extends GetView<VideoUploadController> {
-  const VideoUpload({super.key});
+   VideoUpload({super.key});
+
+   final playlistController=Get.put(PlayListController());
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class VideoUpload extends GetView<VideoUploadController> {
         child: AppBar(
           titleSpacing: 20,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Get.back();
               }),
@@ -29,7 +33,8 @@ class VideoUpload extends GetView<VideoUploadController> {
         ),
       ),
       body: Center(
-        child: Column(
+        child:(playlistController.currentStatus.value!='permanentlyDenied' || playlistController.currentStatus.value!='Denied' )
+        ?Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
@@ -58,6 +63,14 @@ class VideoUpload extends GetView<VideoUploadController> {
                 ),
               ),
             ),
+          ],
+        )
+        :Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+           const Text("Storage permission required"),
+            TextButton(onPressed:()=> openAppSettings(), child: Text("Go to Settings"))
           ],
         ),
       ),

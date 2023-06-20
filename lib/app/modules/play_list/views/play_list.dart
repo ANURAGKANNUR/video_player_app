@@ -41,7 +41,6 @@ class PlayList extends GetView<PlayListController> {
                   ? ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: controller.videoFiles.value.length,
-                      itemExtent: 100,
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       itemBuilder: (context, index) {
                         return GestureDetector(
@@ -50,27 +49,26 @@ class PlayList extends GetView<PlayListController> {
                           child: Card(
                             elevation: 2,
                             child: ListTile(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 5),
+                               contentPadding: const EdgeInsets.symmetric(
+                                   vertical: 5, horizontal: 5),
                               // leading:
-                              //Image(image: FileImage(File(controller.getThumbnail(controller.videoFiles.value[index].path)))),
                               leading: FutureBuilder<String>(
                                 future: controller.getThumbnail(
                                     controller.videoFiles.value[index].path),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<String> snapshot) {
                                   if (snapshot.hasData) {
-                                    final _image = snapshot.data;
+                                    final image = snapshot.data;
                                     return SizedBox(
                                         width: 100,
                                         child: Image(
-                                            image: FileImage(File(_image!))));
+                                            image: FileImage(File(image!))));
                                   }
                                   return const SizedBox();
                                 },
                               ),
                               title: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
                                 child: Text(
                                   controller.videoFiles.value[index]
                                       .toString()
@@ -113,7 +111,7 @@ class PlayList extends GetView<PlayListController> {
                                                             .value[index]),
                                                   ),
                                                   ListTile(
-                                                    title: Text('Delete'),
+                                                    title: const Text('Delete'),
                                                     onTap: () {
                                                       controller
                                                           .deleteVideoFile(
@@ -155,7 +153,7 @@ class PlayList extends GetView<PlayListController> {
                     children: [
                       Spacer(),
                       ElevatedButton(
-                        onPressed: () => Get.toNamed(Routes.videoUpload)?.then(
+                        onPressed: () => Get.toNamed(Routes.videoUpload)!.then(
                             (value) => controller.getAllSavedVideoFiles()),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

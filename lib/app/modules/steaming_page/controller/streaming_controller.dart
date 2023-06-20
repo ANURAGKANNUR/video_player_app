@@ -7,6 +7,18 @@ class StreamController extends GetxController {
 
   final abc = "".obs;
   ChewieController? chewieController;
+  RxDouble brightnessValue = 0.5.obs;
+  RxDouble volumeValue = 0.5.obs;
+
+  setVolume(double value) {
+    volumeValue.value = value;
+    update();
+  }
+
+  setBrightness(double value) {
+    brightnessValue.value = value;
+    update();
+  }
 
   @override
   void onInit() {

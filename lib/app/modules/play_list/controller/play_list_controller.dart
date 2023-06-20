@@ -4,17 +4,33 @@ import 'package:path/path.dart' as path;
 
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PlayListController extends GetxController {
   var videoFiles = List<File>.empty().obs;
-
   var selectedOption = ''.obs;
+  final Permission _storagePermission = Permission.storage;
+  var permissionStatus=''.obs;
+  var currentStatus=''.obs;
+
   @override
-  void onInit() {
+  void onInit(){
     super.onInit();
+    getPermission();
     getAllSavedVideoFiles();
   }
+  getPermission() async {
+    var permission = await _storagePermission.request();
+    permissionStatus.value=permission.name.toString();
+    checkPermission();
+  }
+
+  checkPermission() async {
+    var permission = await _storagePermission.status;
+    currentStatus.value = permission.name.toString();
+  }
+
 
   getAllSavedVideoFiles() async {
     EasyLoading.show();

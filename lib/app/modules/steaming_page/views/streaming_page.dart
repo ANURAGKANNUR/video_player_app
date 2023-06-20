@@ -13,12 +13,11 @@ class StreamPage extends GetView<StreamController> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: (){
+          onPressed: () {
             controller.chewieController!.pause();
             controller.chewieController!.dispose();
 
             Get.back();
-
           },
         ),
         titleSpacing: 20,
@@ -36,8 +35,48 @@ class StreamPage extends GetView<StreamController> {
           controller.chewieController!.dispose();
           return true;
         },
-        child: Chewie(
-          controller: controller.chewieController!,
+        child: Column(
+          children: [
+            Expanded(
+              child: Chewie(
+                controller: controller.chewieController!,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  const Text(
+                    "Brightness",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  const Spacer(),
+                  Obx(
+                    () => Slider(
+                        value: controller.brightnessValue.value,
+                        label: "Brightness",
+                        onChanged: controller.setBrightness),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Text(
+                    "Volume",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  Spacer(),
+                  Obx(() => Slider(
+                      value: controller.volumeValue.value,
+                      label: "Volume",
+                      onChanged: controller.setVolume)),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

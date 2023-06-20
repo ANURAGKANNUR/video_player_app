@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,8 +26,17 @@ class VideoUploadController extends GetxController {
       String appFolderPath = appDir.path;
       String newFilePath =
           path.join(appFolderPath, path.basename(filePath.path));
-      await filePath.copy(newFilePath);
-      Get.back();
+      var file = await filePath.copy(newFilePath);
+      if (file.existsSync()) {
+        Get.snackbar("this video file is already uploaded ",
+            "Please try again with another file",
+            backgroundColor: Colors.red,
+            barBlur: 50,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM);
+      } else {
+        Get.back();
+      }
     } catch (e) {
       Get.snackbar("Unable to upload Video ", "",
           backgroundColor: Colors.red,
