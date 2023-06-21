@@ -18,7 +18,6 @@ class VideoUploadController extends GetxController {
   }
 
   Future uploadFile(PlatformFile pickedFile) async {
-    final file = 'files/${pickedFile.name}';
     final filePath = File(pickedFile.path.toString());
 
     try {
@@ -26,8 +25,7 @@ class VideoUploadController extends GetxController {
       String appFolderPath = appDir.path;
       String newFilePath =
           path.join(appFolderPath, path.basename(filePath.path));
-      var file = await filePath.copy(newFilePath);
-      if (file.existsSync()) {
+      if (File(newFilePath).existsSync()) {
         Get.snackbar("this video file is already uploaded ",
             "Please try again with another file",
             backgroundColor: Colors.red,
@@ -35,6 +33,7 @@ class VideoUploadController extends GetxController {
             colorText: Colors.white,
             snackPosition: SnackPosition.BOTTOM);
       } else {
+        await filePath.copy(newFilePath);
         Get.back();
       }
     } catch (e) {

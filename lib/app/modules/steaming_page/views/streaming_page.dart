@@ -16,6 +16,7 @@ class StreamPage extends GetView<StreamController> {
           onPressed: () {
             controller.chewieController!.pause();
             controller.chewieController!.dispose();
+            controller.resetBrightness();
 
             Get.back();
           },
@@ -33,6 +34,7 @@ class StreamPage extends GetView<StreamController> {
         onWillPop: () async {
           controller.chewieController!.pause();
           controller.chewieController!.dispose();
+          controller.resetBrightness();
           return true;
         },
         child: Column(
@@ -64,7 +66,7 @@ class StreamPage extends GetView<StreamController> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  Text(
+                  const Text(
                     "Volume",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
