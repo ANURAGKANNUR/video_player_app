@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class PlayListController extends GetxController {
   final Permission _storagePermission = Permission.storage;
   var permissionStatus=''.obs;
   var currentStatus=''.obs;
+  final FlutterFFprobe _flutterFFprobe = new FlutterFFprobe();
+
 
   @override
   void onInit(){
@@ -67,5 +70,15 @@ class PlayListController extends GetxController {
     } catch (e) {
       print('Error deleting video file: $e');
     }
+  }
+  Future<String> getDuration(String path) async {
+   var info =  await _flutterFFprobe.getMediaInformation(path);//.then((info) {
+      //print("Media Information");
+     // print("Path: ${info.getMediaProperties()!['filename']}");
+      //print("Format: ${info.getMediaProperties()!['format_name']}");
+      print("${info.getMediaProperties()!['duration']}");
+      //print("Start time: ${info.getMediaProperties()!['start_time']}");
+      //print("Bitrate: ${info.getMediaProperties()!['bit_rate']}");
+      return("Duration: ${double.parse(info.getMediaProperties()!['duration']).toStringAsFixed(2)}");
   }
 }

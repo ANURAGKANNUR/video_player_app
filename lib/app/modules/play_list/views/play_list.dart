@@ -85,10 +85,20 @@ class PlayList extends GetView<PlayListController> {
                                     const EdgeInsets.symmetric(vertical: 5),
                                 child: Row(
                                   children: [
-                                    Text(
-                                        "${ByteConverter(controller.videoFiles.value[index].lengthSync().toDouble()).megaBytes.toStringAsFixed(2)} MB"),
+                                    Text("${ByteConverter(controller.videoFiles.value[index].lengthSync().toDouble()).megaBytes.toStringAsFixed(2)} MB"),
                                     const Spacer(),
-                                    const Expanded(child: Text("10.30.00")),
+                                     FutureBuilder<String>(
+                                       future: controller.getDuration(controller.videoFiles.value[index].path),
+                                       builder: (BuildContext context,AsyncSnapshot<String> snapshot) {
+                                         if (snapshot.hasData) {
+                                           final duration = snapshot.data;
+                                           return SizedBox(
+                                               width: 100,
+                                               child: Text(duration!));
+                                         }
+                                         return const SizedBox();
+                                       }
+                                     ),
                                   ],
                                 ),
                               ),
