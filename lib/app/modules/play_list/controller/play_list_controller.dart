@@ -72,13 +72,7 @@ class PlayListController extends GetxController {
     }
   }
   Future<String> getDuration(String path) async {
-   var info =  await _flutterFFprobe.getMediaInformation(path);//.then((info) {
-      //print("Media Information");
-     // print("Path: ${info.getMediaProperties()!['filename']}");
-      //print("Format: ${info.getMediaProperties()!['format_name']}");
-      print("${info.getMediaProperties()!['duration']}");
-      //print("Start time: ${info.getMediaProperties()!['start_time']}");
-      //print("Bitrate: ${info.getMediaProperties()!['bit_rate']}");
+   var info =  await _flutterFFprobe.getMediaInformation(path);
       return("Duration: ${double.parse(info.getMediaProperties()!['duration']).toStringAsFixed(2)}");
   }
 }
