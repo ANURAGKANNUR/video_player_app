@@ -4,6 +4,7 @@ import 'package:byte_converter/byte_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_app/app/modules/play_list/controller/play_list_controller.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -99,6 +100,9 @@ class PlayList extends GetView<PlayListController> {
                                          return const SizedBox();
                                        }
                                      ),
+                                    ElevatedButton(onPressed: (){
+                                      Share.shareFiles([controller.videoFiles.value[index].path], text: 'Great picture');
+                                    }, child: Text("share"))
                                   ],
                                 ),
                               ),

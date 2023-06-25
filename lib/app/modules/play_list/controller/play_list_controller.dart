@@ -50,6 +50,8 @@ class PlayListController extends GetxController {
     EasyLoading.dismiss();
   }
 
+
+
   Future<String> getThumbnail(String path) async {
     final image = await VideoThumbnail.thumbnailFile(
       video: path,
